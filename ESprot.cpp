@@ -38,10 +38,15 @@ int statsk[11] = {11, 0};
 int /* clause stack */ clausk[11], sn, f, i, j, s, k, /*stack pointer */ sp;
 
 //int sn, f, i, j, s, k, sp; 
-string weightGain, lossOfLO, depressGreaterTwoYrs;
-vector <string> variableList[10];
-vector <string> conclusionList[10]; 
-vector <string> clauseVarList[10];
+//sy = symptom, DE = depression, WG = weight gain, LL = losso of Loved one, D2 = Depression greater than 2 years
+//DC = Difficulty concentrating, HY = hyperactivity, FB = food binging, SI = suicidal ideation, FI = feelings of isolation
+//IS = Irregular sleep patterns, AX = anxiety, PA = Panic attack, A2 = anxiety greater than two years, HA = hallucinations
+//ME = manic episodes, FA = Fatigue, FH = Feelings of helplessness, IN = Insomnia, MT= Missing time, ED = Extreme debilitation
+//AP = avoiding people/places
+string variableList[22] = {"SY","DE","WG","LL","D2","DC","HY","FB","SI","FI",
+"IS","AX","PA","A2","HA","ME","FA","FH","IN","MT","ED","AP"};
+string conclusionList[24]; 
+string clauseVarList[520];
 stack <int> clauseStack;
 vector <int> statementStack; 
 vector <int> instantiatedList;
@@ -78,9 +83,25 @@ main()
 	string missingTime = "";
 	string extremeDebil = "";
 	string avoidingPeople = "";
+	for (int i = 0; i<24; i++) {
+		
+		conclusionList[i] = "diagnosis";
+		if (i == 1) {
+			conclusionList[i] = "disorder";
+		}
+    }
+
+    cout << "Conclusion List: " << endl ;
+	for (int i = 0; i<24; i++){
+		cout << 10*(i+1) << ": "<< conclusionList[i] << endl;
+	}
+	cout << "Variable List: " << endl ;
+	for (int i = 0; i<22; i++) {
+		cout << "Variable "<< i+1 << " " << variableList[i] << endl;
+	}	
 	
 	
-	cout << "Any symptoms? Enter y/n";
+ 	cout << "Any symptoms? Enter y/n";
 	cin >> symptom;
 	if (symptom == "y") {
 		cout << "Depression?";
