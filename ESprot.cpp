@@ -136,9 +136,6 @@ main()
 					if (isolation == "y") {
 						cout << "D = MDD";
 					}
-					else if (suicidal == "n"){
-						cout << "D = S.A.D.";
-					}
 					else if (isolation == "n") {
 						cout << "Irregular sleep patterns?";
 						cin >> irregSleep;
@@ -150,6 +147,9 @@ main()
 						}
 					}
 				}
+				else if (suicidal == "n"){
+						cout << "D = S.A.D.";
+					}
 				
 			}		
 		}
@@ -216,7 +216,14 @@ main()
 				if (panicAttack == "y") {
 					cout << "Avoiding people or places?";
 					cin >> avoidingPeople;
+					if (avoidingPeople == "y") {
+						cout << "D = Panic Disorder with Agoraphobia";
+					}
+					else if (avoidingPeople == "n") {
+						cout << "D = Panic Disorder";
+					}
 				}
+					
 				else if (panicAttack == "n") {
 					cout << "Missing time?";
 					cin >> missingTime;
