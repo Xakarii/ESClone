@@ -98,7 +98,7 @@ main()
 						cout << "D = Disthymia";
 					}
 					else if (depressionGreater2yrs == "n") {
-						cout << "D = Normal Bereavement"
+						cout << "D = Normal Bereavement";
 					}
 				}
 				else if (lossOfLovedOne == "n") {
@@ -135,6 +135,9 @@ main()
 					cin >> isolation;
 					if (isolation == "y") {
 						cout << "D = MDD";
+					}
+					else if (suicidal == "n"){
+						cout << "D = S.A.D.";
 					}
 					else if (isolation == "n") {
 						cout << "Irregular sleep patterns?";
