@@ -186,7 +186,7 @@ main()
 		}
 		 cout << "Clause # " << i <<  " " << clauseVarList[i] << endl;
 		if (i%22 == 0) {
-			cout << "Clause Number: " << i/22 << endl;
+			cout << "Clause Number: " << i/22 + 1<< endl;
 		}
 	}
 	
