@@ -38,12 +38,12 @@ int statsk[11] = {11, 0};
 int /* clause stack */ clausk[11], sn, f, i, j, s, k, /*stack pointer */ sp;
 
 //int sn, f, i, j, s, k, sp; 
-//sy = symptom, DE = depression, WG = weight gain, LL = losso of Loved one, D2 = Depression greater than 2 years
+//SY = symptom, DO = disorder, DE = depression, WG = weight gain, LL = losso of Loved one, D2 = Depression greater than 2 years
 //DC = Difficulty concentrating, HY = hyperactivity, FB = food binging, SI = suicidal ideation, FI = feelings of isolation
 //IS = Irregular sleep patterns, AX = anxiety, PA = Panic attack, A2 = anxiety greater than two years, HA = hallucinations
 //ME = manic episodes, FA = Fatigue, FH = Feelings of helplessness, IN = Insomnia, MT= Missing time, ED = Extreme debilitation
 //AP = avoiding people/places
-string variableList[22] = {"SY","DE","WG","LL","D2","DC","HY","FB","SI","FI",
+string variableList[23] = {"SY","DO","DE","WG","LL","D2","DC","HY","FB","SI","FI",
 "IS","AX","PA","A2","HA","ME","FA","FH","IN","MT","ED","AP"};
 string conclusionList[24]; 
 string clauseVarList[520];
@@ -90,15 +90,125 @@ main()
 			conclusionList[i] = "disorder";
 		}
     }
+    for (int i = 1; i<520; i++) {
+    	if (i == 1 || i == 45 || i == 67 || i == 83 || 
+		i == 111 || i == 133 || i == 155 || i == 177 || 
+		i == 199 || i == 221 || i == 243 || i == 265 || 
+		i == 287 || i == 309 || i == 331 || i == 353 || 
+		i == 375 || i == 397 || i == 419 || i == 441 || 
+		i == 463 || i == 485 || i == 507) {
+			//symptoms / SY
+			clauseVarList[i] = "SY";
+		}
+		if (i == 23 || i == 46 || i == 68 || i == 84 || 
+		i == 112 || i == 134 || i == 156 || i == 178 || 
+		i == 200 || i == 222 || i == 244 || i == 266 || 
+		i == 288 || i == 310 || i == 332 || i == 354 || 
+		i == 376 || i == 398 || i == 420 || i == 442 || 
+		i == 464 || i == 486 || i == 508) {
+			//disorder / DO
+			clauseVarList[i] = "DO";
+		}
+		if (i == 47 || i == 69 || i == 85 || i == 201 || i == 223 || i == 245 ) {
+			//depression / DE
+			clauseVarList[i] = "DE";
+		}
+		if (i == 70 || i == 86  ) {
+			//loss of loved one / LL
+			clauseVarList[i] = "LL";
+		}
+		
+		if (i == 87 ) {
+			//depressed > 2 yrs / D2
+			clauseVarList[i] = "D2";
+		}
+		if (i == 113 || i == 135 || i == 157 || i == 179 ) {
+			//weight gain / WG
+			clauseVarList[i] = "WG";
+		}
+		if (i == 114 || i == 136 ) {
+			//difficulty concentrating / DC
+			clauseVarList[i] = "DC";
+		}
+		if (i == 137) {
+			//hyperactivity / HY
+			clauseVarList[i] = "HY";
+		}
+		if (i == 180) {
+			//food binging / FB
+			clauseVarList[i] = "FB";
+		}
+		if (i == 202 || i == 224 || i == 246 ) {
+			//suicidal ideation / SI
+			clauseVarList[i] = "SI";
+		}
+		if (i == 225 ) {
+			//feelings of isolation / FI
+			clauseVarList[i] = "FI";
+		}
+		if (i == 247) {
+			//irregular sleep patterns / IS
+			clauseVarList[i] = "IS";
+		}
+		if (i == 289 ) {
+			//missing time / MT 
+			clauseVarList[i] = "MT";
+		}
+		if (i == 311 || i == 333) {
+			//panic attack / PA
+			clauseVarList[i] = "PA";
+		}
+		if (i == 334) {
+			//avoiding people/places / AP
+			clauseVarList[i] = "AP";
+		}
+		if (i == 355 || i == 377 || i == 399 || i == 421 || i == 443 || i == 465 || i == 487 || i == 509) {
+			//anxiety / AX
+			clauseVarList[i] = "AX";
+		}
+		if (i == 356) {
+			//extreme debilitation / ED
+			clauseVarList[i] = "ED";
+		}
+		if (i == 400 || i == 422 || i == 444 || i == 466 || i == 488 || i == 510) {
+			//anxiety > 2 yrs / A2
+			clauseVarList[i] = "A2";
+		}
+		if (i == 423 || i == 445 || i == 467  ) {
+			//fatigue / FA
+			clauseVarList[i] = "FA";
+		}
+		if (i == 446) {
+			//feelings of helplessness / FH 
+			clauseVarList[i] = "FH";
+		}
+		if (i == 468) {
+			//insomnia / IN 
+			clauseVarList[i] = "IN";
+		}
+		if (i == 489 || i == 511) {
+			//hallucinations / HA
+			clauseVarList[i] = "HA";
+		}
+		if (i == 512) {
+			//manic episodes / ME
+			clauseVarList[i] = "ME";
+		}
+		
+	}
 
     cout << "Conclusion List: " << endl ;
 	for (int i = 0; i<24; i++){
 		cout << 10*(i+1) << ": "<< conclusionList[i] << endl;
 	}
 	cout << "Variable List: " << endl ;
-	for (int i = 0; i<22; i++) {
+	for (int i = 0; i<23; i++) {
 		cout << "Variable "<< i+1 << " " << variableList[i] << endl;
 	}	
+	cout << "Clause Var list: " << endl;
+	for (int i = 1; i <520; i++) {
+		 cout << "Clause Var # " << i <<  " " << clauseVarList[i] << endl;
+	}
 	
 	
  	cout << "Any symptoms? Enter y/n";
@@ -262,18 +372,6 @@ main()
 		
 	}
 		
-	
-	/*
-	string fatigue = "";
-	string helplessness = "";
-	string insomnia = "";
-	string missingTime = "";
-	string extremeDebil = "";
-	string avoidingPeople = "";
-	*/
-	//statementStack.push_back(1);
-	//statementStack.push_back(2);
-	
 	//determine_member_concl_list(conclusionStatementNum);
 	for (const int& i : statementStack) {
     	cout << i << "  ";
