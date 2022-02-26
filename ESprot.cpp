@@ -6,38 +6,12 @@
 
 using namespace std;
 
-/*****backward chaining *******/ 
-/* Install your IF clauses in sequence in the first case 
-   statement of the main program 
-   example: if((a1==2) && (a2==6)) s=1; 
-                      if(strcmp(j, NO") != 0) s=1; ?
-   the then part of the above construction always 
-   contains s=1; 
-   install your the clauses in sequence in the second 
-   case statement of the main program 
-   example strcpy(po,"YES"); 
-/*  conclusion list */ 
-char conclt[10][3]; 
-/*  variable list */ 
-char varlt[10][3]; 
-/*  clause vairable list */ 
-char clvarlt[40][3]; 
-char varble[3]; 
-string variable;
-char /* qualify */ qu[4], /* degree*/ de[4];
-string symptoms, depression;
-char /* discovery */ di[4], /* position */ po[4]; 
-char buff[128]; 
-
 /* instantiated list */ 
 int instlt[11] = {11, 0}; 
-
 /* statement stack */ 
 int statsk[11] = {11, 0};
-
 int /* clause stack */ clausk[11], sn, f, i, j, s, k, /*stack pointer */ sp;
 
-//int sn, f, i, j, s, k, sp; 
 //SY = symptom, DO = disorder, DE = depression, WG = weight gain, LL = losso of Loved one, D2 = Depression greater than 2 years
 //DC = Difficulty concentrating, HY = hyperactivity, FB = food binging, SI = suicidal ideation, FI = feelings of isolation
 //IS = Irregular sleep patterns, AX = anxiety, PA = Panic attack, A2 = anxiety greater than two years, HA = hallucinations
@@ -91,7 +65,7 @@ main()
 		}
     }
     for (int i = 1; i<520; i++) {
-    	if (i == 1 || i == 45 || i == 67 || i == 83 || 
+    	if (i == 1 || i == 45 || i == 67 || i == 89 || 
 		i == 111 || i == 133 || i == 155 || i == 177 || 
 		i == 199 || i == 221 || i == 243 || i == 265 || 
 		i == 287 || i == 309 || i == 331 || i == 353 || 
@@ -100,7 +74,7 @@ main()
 			//symptoms / SY
 			clauseVarList[i] = "SY";
 		}
-		if (i == 23 || i == 46 || i == 68 || i == 84 || 
+		if (i == 23 || i == 46 || i == 68 || i == 90 || 
 		i == 112 || i == 134 || i == 156 || i == 178 || 
 		i == 200 || i == 222 || i == 244 || i == 266 || 
 		i == 288 || i == 310 || i == 332 || i == 354 || 
@@ -109,16 +83,16 @@ main()
 			//disorder / DO
 			clauseVarList[i] = "DO";
 		}
-		if (i == 47 || i == 69 || i == 85 || i == 201 || i == 223 || i == 245 ) {
+		if (i == 47 || i == 69 || i == 91 || i == 201 || i == 223 || i == 245 ) {
 			//depression / DE
 			clauseVarList[i] = "DE";
 		}
-		if (i == 70 || i == 86  ) {
+		if (i == 70 || i == 92  ) {
 			//loss of loved one / LL
 			clauseVarList[i] = "LL";
 		}
 		
-		if (i == 87 ) {
+		if (i == 93 ) {
 			//depressed > 2 yrs / D2
 			clauseVarList[i] = "D2";
 		}
@@ -207,7 +181,13 @@ main()
 	}	
 	cout << "Clause Var list: " << endl;
 	for (int i = 1; i <520; i++) {
-		 cout << "Clause Var # " << i <<  " " << clauseVarList[i] << endl;
+		if (i == 1) {
+			cout << "Clause Number: " << 1 << endl;
+		}
+		 cout << "Clause # " << i <<  " " << clauseVarList[i] << endl;
+		if (i%22 == 0) {
+			cout << "Clause Number: " << i/22 << endl;
+		}
 	}
 	
 	
