@@ -48,14 +48,14 @@ main()
 	cout << "Clause Var list: " << endl;
 	displayList(clauseVarList, 520);
 	
-	cout << "Enter conclusion: ";
+	cout << "Enter conclusion: DI for diagnosis (string) or DO for Disorder (binary): ";
 	cin >> conclusion;
 	CO = diagnose(conclusion);
 	treat(CO);
 	//determine_member_concl_list(conclusionStatementNum);
-	for (const int& i : statementStack) {
-    	cout << i << "  ";
-    }
+	//for (const int& i : statementStack) {
+    //	cout << i << "  ";
+    //}
 }
 
 void determine_member_concl_list(int conclusionStatementNum) {
@@ -104,8 +104,10 @@ string diagnose(string concl) {
 			CO = "none";
 		}
 		
-	}
-	if (symptom == "y") {
+	} else if (symptom == "y" && concl == "DO") {
+		cout << "DO = YES";
+		CO = "yes";
+	} else if (symptom == "y" && concl == "DI") {
 		cout << "Experiencing depression?";
 		cin >> depression;	
 		if (depression == "y") {
@@ -154,7 +156,7 @@ string diagnose(string concl) {
 						}
 					}
 					
-				}
+				} 
 			}
 			else if (weightGain == "n") {
 				cout << "Any suicidal ideation?";
@@ -237,6 +239,7 @@ string diagnose(string concl) {
 						
 					}
 				}
+				
 				else if (anxietyGreater2yrs == "n") {
 					cout << "Extreme debilitation?";
 					cin >> extremeDebil;
@@ -250,7 +253,6 @@ string diagnose(string concl) {
 					}
 				}
 				
-			}
 			else if (anxiety == "n") {
 				cout << "panicAttack?";
 				cin >> panicAttack;
@@ -284,13 +286,14 @@ string diagnose(string concl) {
 		}
 	}
 	return CO;
-} 
+	} 
+}
 
 void instantiate(string conclusionList[], string clauseVarList[]) {
 	for (int i = 0; i<24; i++) {
-		conclusionList[i] = "diagnosis";
+		conclusionList[i] = "DI";
 		if (i == 1) {
-		conclusionList[i] = "disorder";
+		conclusionList[i] = "DO";
 		}
     }
     for (int i = 1; i<520; i++) {
@@ -433,12 +436,56 @@ void displayList(string list[], int l) {
 		//}
 	}
 void treat(string c) {
-	cout << endl;
-	if (c == "none") {
-		cout << "No treatment recommended";
+	cout << endl << "Recommendation: ";
+	if (c == "yes") {
+		cout << "Seek psychiatric assessment";
 	}
-	if (c == "disthymia") {
+	if (c == "none" || c == "no") {
+		cout << "No treatment recommended";
+	} else if (c == "disthymia") {
 		cout << "Therapy + Zoloft";
+	} else if (c == "bereavement") {
+		cout << "Group counseling";
+	} else if (c == "ADD") {
+		cout << "Adderall";
+	} else if (c == "ADHD") {
+		cout << "Adderall & Hydroxizine";
+	} else if (c == "binge eating disorder") {
+		cout << "Group therapy & nutrition counseling";
+	} else if (c == "hypothyroidism ") {
+		cout << "Levothyroxine";
+	} else if (c == "MDD") {
+		cout << "Therapy & Prozac";
+	} else if (c == "bipolar disorder") {
+		cout << "Therapy and Abilify";
+	} else if (c == "OCD") {
+		cout << "Therapy";
+	} else if (c == "SAD") {
+		cout << "Vitamin D supplements";
+	} else if (c == "schizoaffective") {
+		cout << "Olanzapine, Sodium Valproate and Cogentin";
+	} else if (c == "schizophrenia") {
+		cout << "Sodium Valproate, Olanzapine";
+	} else if (c == "burnout") {
+		cout << "Occupational counseling";
+	} else if (c == "mental fatigue") {
+		cout << "Mindfulness practice";
+	} else if (c == "chronic fatigue syndrome") {
+		cout << "Nutritional counseling & CBD";
+	} else if (c == "fibromyalgia") {
+		cout << "Celebrex";
+	} else if (c == "PTSD") {
+		cout << "Therapy, lorazepam";
+	} else if (c == "GAD") {
+		cout << "Hydroxyzine HCL";
+	} else if (c == "panic disorder with agoraphobia") {
+		cout << "Therapy, Valium";
+	} else if (c == "panic disorder") {
+		cout << "Therapy, mindfulness practice";
+	} else if (c == "DID") {
+		cout << "Psychosocial therapy, sertraline";
+	} else if (c == "hypochondria") {
+		cout << "Cognitive behavioral therapy";
 	}
 }
 void getClauseLocation(string clause) {
