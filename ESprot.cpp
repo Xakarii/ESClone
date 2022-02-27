@@ -35,6 +35,7 @@ void getClauseLocation(string clause);
 main() 
 {
 	int conclusionStatementNum = 0;
+	string conclusion = "";
 	string symptom = "";
 	string depression = "";
 	string weightGain = "";
@@ -57,6 +58,9 @@ main()
 	string missingTime = "";
 	string extremeDebil = "";
 	string avoidingPeople = "";
+	string DI = "";
+	string DO = "";
+	
 	for (int i = 0; i<24; i++) {
 		
 		conclusionList[i] = "diagnosis";
@@ -171,28 +175,39 @@ main()
 		
 	}
 
-    cout << "Conclusion List: " << endl ;
+    cout << "\t *** Conclusion List: ***" << endl ;
 	for (int i = 0; i<24; i++){
 		cout << 10*(i+1) << ": "<< conclusionList[i] << endl;
 	}
+	cout << "PRESS ENTER TO CONTINUE";
+	cin.get();
 	cout << "Variable List: " << endl ;
 	for (int i = 0; i<23; i++) {
 		cout << "Variable "<< i+1 << " " << variableList[i] << endl;
 	}	
+	cout << "PRESS ENTER TO CONTINUE";
+	cin.get();
 	cout << "Clause Var list: " << endl;
 	for (int i = 1; i <520; i++) {
 		if (i == 1) {
 			cout << "Clause Number: " << 1 << endl;
 		}
 		 cout << "Clause # " << i <<  " " << clauseVarList[i] << endl;
+		
 		if (i%22 == 0) {
+			cout << "PRESS ENTER TO CONTINUE";
+			cin.get();
 			cout << "Clause Number: " << i/22 + 1<< endl;
 		}
 	}
 	
-	
+	cout << "Enter conclusion: ";
+	cin >> conclusion;
  	cout << "Any symptoms? Enter y/n";
 	cin >> symptom;
+	if (symptom == "n") {
+		cout << "DI = none";
+	}
 	if (symptom == "y") {
 		cout << "Depression?";
 		cin >> depression;	
