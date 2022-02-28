@@ -242,7 +242,7 @@ string diagnose(string concl) {
 						CO = "GAD";
 					}
 				}
-				
+			}
 			else if (anxiety == "n") {
 				cout << "panicAttack?";
 				cin >> panicAttack;
@@ -274,7 +274,6 @@ string diagnose(string concl) {
 				
 			}
 		}
-	}
 
 
 	return CO;
