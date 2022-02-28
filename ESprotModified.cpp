@@ -12,10 +12,7 @@ using namespace std::chrono;
 //ME = manic episodes, FA = Fatigue, FH = Feelings of helplessness, IN = Insomnia, MT= Missing time, ED = Extreme debilitation
 //AP = avoiding people/places
 
-
-
-
-float /* grade */ gr, /*experience */ ex; 
+ 
 void determine_member_concl_list(int csn); 
 string diagnose(string conclusion); 
 void instantiate(string conclusionList[], string clauseVarList[]); 
@@ -23,11 +20,11 @@ void getClauseLocation(string clause);
 void displayList(string list[], int l);
 void treat(string c);
 
-int concListLen = 24;
-int clauselen = 520;
-int varListLen = 23;
+const int concListLen = 24;
+const int clauselen = 520;
+const int varListLen = 23;
 
-main() 
+int main() 
 {
 	auto start = high_resolution_clock::now();
 	string variableList[varListLen] = {"SY","DO","DE","WG","LL","D2","DC","HY","FB","SI","FI",
@@ -278,6 +275,7 @@ string diagnose(string concl) {
 			}
 		}
 	}
+
 
 	return CO;
 	} 
