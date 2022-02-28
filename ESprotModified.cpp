@@ -1,16 +1,19 @@
 #include <iostream>
-#include <vector>
-#include <string>
-#include <list>
-#include <stack>
+#include <string>	
+#include <chrono>
+
 
 using namespace std;
+using namespace std::chrono;
 
 //SY = symptom, DO = disorder, DE = depression, WG = weight gain, LL = losso of Loved one, D2 = Depression greater than 2 years
 //DC = Difficulty concentrating, HY = hyperactivity, FB = food binging, SI = suicidal ideation, FI = feelings of isolation
 //IS = Irregular sleep patterns, AX = anxiety, PA = Panic attack, A2 = anxiety greater than two years, HA = hallucinations
 //ME = manic episodes, FA = Fatigue, FH = Feelings of helplessness, IN = Insomnia, MT= Missing time, ED = Extreme debilitation
 //AP = avoiding people/places
+
+
+
 
 float /* grade */ gr, /*experience */ ex; 
 void determine_member_concl_list(int csn); 
@@ -20,17 +23,18 @@ void getClauseLocation(string clause);
 void displayList(string list[], int l);
 void treat(string c);
 
+int concListLen = 24;
+int clauselen = 520;
+int varListLen = 23;
+
 main() 
 {
-	string variableList[23] = {"SY","DO","DE","WG","LL","D2","DC","HY","FB","SI","FI",
+	auto start = high_resolution_clock::now();
+	string variableList[varListLen] = {"SY","DO","DE","WG","LL","D2","DC","HY","FB","SI","FI",
 "IS","AX","PA","A2","HA","ME","FA","FH","IN","MT","ED","AP"};
 	string conclusion = "";
-	string conclusionList[24]; 
-	string clauseVarList[520];
-	stack <int> clauseStack;
-	vector <int> statementStack; 
-	vector <int> instantiatedList;
-	vector <string> buffer;
+	string conclusionList[concListLen]; 
+	string clauseVarList[clauselen];
 	string DI = "";
 	string DO = "";
 	string CO = "";
@@ -38,37 +42,26 @@ main()
 	instantiate(conclusionList, clauseVarList);
 
     cout << "\t *** Conclusion List: ***" << endl ;
-	displayList(conclusionList, 24);
+	displayList(conclusionList, concListLen);
 	cout << "PRESS ENTER TO CONTINUE";
 	cin.get();
 	cout << "Variable List: " << endl ;
-	displayList(variableList, 23);	
+	displayList(variableList, varListLen);	
 	cout << "PRESS ENTER TO CONTINUE";
 	cin.get();
 	cout << "Clause Var list: " << endl;
-	displayList(clauseVarList, 520);
+	displayList(clauseVarList, clauselen);
 	
 	cout << "Enter conclusion: DI for diagnosis (string) or DO for Disorder (binary): ";
 	cin >> conclusion;
 	CO = diagnose(conclusion);
 	treat(CO);
-	//determine_member_concl_list(conclusionStatementNum);
-	//for (const int& i : statementStack) {
-    //	cout << i << "  ";
-    //}
+	
+	auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<seconds>(stop - start);
+    cout << "\nExecution time in seconds	: " << duration.count() << endl;
 }
 
-void determine_member_concl_list(int conclusionStatementNum) {
-	if (conclusionStatementNum != 0){ 
-                  /* if sn = 0 then no conclusion of that name */  
-                  /* push statement number (sn) and clause number=1 on goal 
-                     stack which is composed of the statement stack (statsk) 
-                     and clause stack (clausk) */ 
-            //push_on_stack();  
-	               /* calculate clause location in clause-variable 
-	                  list */ 
-	}	
-}
 string diagnose(string concl) {
 	string CO = "";  // CO is the conclusion, either concl = DO = (yes or no), or DI = (none or diagnosis)
 	string symptom = "";
@@ -285,18 +278,19 @@ string diagnose(string concl) {
 			}
 		}
 	}
+
 	return CO;
 	} 
 }
 
 void instantiate(string conclusionList[], string clauseVarList[]) {
-	for (int i = 0; i<24; i++) {
+	for (int i = 0; i<concListLen; i++) {
 		conclusionList[i] = "DI";
 		if (i == 1) {
 		conclusionList[i] = "DO";
 		}
     }
-    for (int i = 1; i<520; i++) {
+    for (int i = 1; i<clauselen; i++) {
     	if (i == 1 || i == 45 || i == 67 || i == 89 || 
 		i == 111 || i == 133 || i == 155 || i == 177 || 
 		i == 199 || i == 221 || i == 243 || i == 265 || 
@@ -408,13 +402,13 @@ void instantiate(string conclusionList[], string clauseVarList[]) {
 
 void displayList(string list[], int l) {
 	for (int i=0; i<l; i++){
-		if (l == 24) {
+		if (l == concListLen) {
 		cout << 10*(i+1) << ": "<< list[i] << endl;
-		} else if (l == 23) {
+		} else if (l == varListLen) {
 			//for (int i = 0; i<23; i++) {
 			cout << "Variable "<< i+1 << " " << list[i] << endl;
 			//}
-		} else if (l == 520) 
+		} else if (l == clauselen) 
 		{ 
 				//for (int i = 1; i <520; i++) {
 					if (i == 0) {
@@ -435,6 +429,10 @@ void displayList(string list[], int l) {
 		
 		//}
 	}
+	
+	
+	
+	
 void treat(string c) {
 	cout << endl << "Recommendation: ";
 	if (c == "yes") {
@@ -488,6 +486,4 @@ void treat(string c) {
 		cout << "Cognitive behavioral therapy";
 	}
 }
-void getClauseLocation(string clause) {
-	cout << "...\n";
-}
+
